@@ -206,6 +206,67 @@ extension RtmPrivateConfigBufferExt on RtmPrivateConfig {
   }
 }
 
+extension GetHistoryMessagesOptionsBufferExt on GetHistoryMessagesOptions {
+  GetHistoryMessagesOptions fillBuffers(List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    return this;
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    return bufferList;
+  }
+}
+
+extension HistoryMessageBufferExt on HistoryMessage {
+  HistoryMessage fillBuffers(List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    Uint8List? message;
+    if (bufferList.length > 0) {
+      message = bufferList[0];
+    }
+    return HistoryMessage(
+        messageType: messageType,
+        publisher: publisher,
+        message: message,
+        messageLength: messageLength,
+        customType: customType,
+        timestamp: timestamp);
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    if (message != null) {
+      bufferList.add(message!);
+    }
+    return bufferList;
+  }
+}
+
+extension ChannelListBufferExt on ChannelList {
+  ChannelList fillBuffers(List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    return this;
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    return bufferList;
+  }
+}
+
+extension AffectedResourcesBufferExt on AffectedResources {
+  AffectedResources fillBuffers(List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    return this;
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    return bufferList;
+  }
+}
+
 extension RtmConfigBufferExt on RtmConfig {
   RtmConfig fillBuffers(List<Uint8List> bufferList) {
     if (bufferList.isEmpty) return this;
@@ -320,6 +381,18 @@ extension LockEventBufferExt on LockEvent {
 
 extension StorageEventBufferExt on StorageEvent {
   StorageEvent fillBuffers(List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    return this;
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    return bufferList;
+  }
+}
+
+extension TokenEventBufferExt on TokenEvent {
+  TokenEvent fillBuffers(List<Uint8List> bufferList) {
     if (bufferList.isEmpty) return this;
     return this;
   }

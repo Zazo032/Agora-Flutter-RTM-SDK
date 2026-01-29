@@ -1,13 +1,13 @@
 import '../config.dart' as config;
 
 String get appId {
-  const appId = String.fromEnvironment('TEST_RTM_APP_ID', defaultValue: '');
+  const appId = String.fromEnvironment('TEST_APP_ID', defaultValue: '');
   return appId.isNotEmpty ? appId : config.appId;
 }
 
 String get token {
-  const token = String.fromEnvironment('TEST_RTM_TOKEN', defaultValue: '');
-  return token.isNotEmpty ? token : config.token;
+  const token = String.fromEnvironment('TEST_TOKEN', defaultValue: '__UNSET__');
+  return token == '__UNSET__' ? config.token : token;
 }
 
 String get channelId {

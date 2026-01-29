@@ -12,6 +12,7 @@ abstract class RtmResultHandler {
       onTopicEvent: onTopicEvent,
       onLockEvent: onLockEvent,
       onStorageEvent: onStorageEvent,
+      onTokenEvent: onTokenEvent,
       onJoinResult: onJoinResult,
       onLeaveResult: onLeaveResult,
       onPublishTopicMessageResult: onPublishTopicMessageResult,
@@ -51,6 +52,7 @@ abstract class RtmResultHandler {
       onPresenceSetStateResult: onPresenceSetStateResult,
       onPresenceRemoveStateResult: onPresenceRemoveStateResult,
       onPresenceGetStateResult: onPresenceGetStateResult,
+      onHistoryGetMessagesResult: onHistoryGetMessagesResult,
     );
   }
   late final RtmEventHandler rtmEventHandler;
@@ -82,6 +84,10 @@ abstract class RtmResultHandler {
   @visibleForTesting
   @protected
   void onStorageEvent(StorageEvent event) {}
+
+  @visibleForTesting
+  @protected
+  void onTokenEvent(TokenEvent event) {}
 
   @visibleForTesting
   @protected
@@ -402,8 +408,8 @@ abstract class RtmResultHandler {
 
   @visibleForTesting
   @protected
-  void onGetUserChannelsResult(
-      int requestId, ChannelInfo channels, int count, RtmErrorCode errorCode) {
+  void onGetUserChannelsResult(int requestId, List<ChannelInfo> channels,
+      int count, RtmErrorCode errorCode) {
     final result = GetUserChannelsResult(channels: channels, count: count);
     response(requestId, (result, errorCode));
   }
@@ -427,6 +433,19 @@ abstract class RtmResultHandler {
   void onPresenceGetStateResult(
       int requestId, UserState state, RtmErrorCode errorCode) {
     final result = GetStateResult(state: state);
+    response(requestId, (result, errorCode));
+  }
+
+  @visibleForTesting
+  @protected
+  void onHistoryGetMessagesResult(
+      int requestId,
+      List<HistoryMessage> messageList,
+      int count,
+      int newStart,
+      RtmErrorCode errorCode) {
+    final result = GetMessagesResult(
+        messageList: messageList, count: count, newStart: newStart);
     response(requestId, (result, errorCode));
   }
 }

@@ -242,6 +242,7 @@ PublishOptions _$PublishOptionsFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$RtmMessageTypeEnumMap, json['messageType']) ??
               RtmMessageType.binary,
       customType: json['customType'] as String?,
+      storeInHistory: json['storeInHistory'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$PublishOptionsToJson(PublishOptions instance) {
@@ -256,6 +257,7 @@ Map<String, dynamic> _$PublishOptionsToJson(PublishOptions instance) {
   writeNotNull('channelType', _$RtmChannelTypeEnumMap[instance.channelType]);
   writeNotNull('messageType', _$RtmMessageTypeEnumMap[instance.messageType]);
   writeNotNull('customType', instance.customType);
+  writeNotNull('storeInHistory', instance.storeInHistory);
   return val;
 }
 
@@ -401,6 +403,103 @@ Map<String, dynamic> _$RtmPrivateConfigToJson(RtmPrivateConfig instance) {
   return val;
 }
 
+GetHistoryMessagesOptions _$GetHistoryMessagesOptionsFromJson(
+        Map<String, dynamic> json) =>
+    GetHistoryMessagesOptions(
+      messageCount: (json['messageCount'] as num?)?.toInt() ?? 100,
+      start: (json['start'] as num?)?.toInt() ?? 0,
+      end: (json['end'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$GetHistoryMessagesOptionsToJson(
+    GetHistoryMessagesOptions instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messageCount', instance.messageCount);
+  writeNotNull('start', instance.start);
+  writeNotNull('end', instance.end);
+  return val;
+}
+
+HistoryMessage _$HistoryMessageFromJson(Map<String, dynamic> json) =>
+    HistoryMessage(
+      messageType:
+          $enumDecodeNullable(_$RtmMessageTypeEnumMap, json['messageType']) ??
+              RtmMessageType.binary,
+      publisher: json['publisher'] as String?,
+      messageLength: (json['messageLength'] as num?)?.toInt() ?? 0,
+      customType: json['customType'] as String?,
+      timestamp: (json['timestamp'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$HistoryMessageToJson(HistoryMessage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messageType', _$RtmMessageTypeEnumMap[instance.messageType]);
+  writeNotNull('publisher', instance.publisher);
+  writeNotNull('messageLength', instance.messageLength);
+  writeNotNull('customType', instance.customType);
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+ChannelList _$ChannelListFromJson(Map<String, dynamic> json) => ChannelList(
+      channels: (json['channels'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$ChannelListToJson(ChannelList instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('channels', instance.channels);
+  return val;
+}
+
+AffectedResources _$AffectedResourcesFromJson(Map<String, dynamic> json) =>
+    AffectedResources(
+      messageChannels: json['messageChannels'] == null
+          ? null
+          : ChannelList.fromJson(
+              json['messageChannels'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AffectedResourcesToJson(AffectedResources instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messageChannels', instance.messageChannels?.toJson());
+  return val;
+}
+
+const _$RtmTokenEventTypeEnumMap = {
+  RtmTokenEventType.willExpire: 1,
+  RtmTokenEventType.readPermissionRevoked: 2,
+};
+
 const _$RtmLinkStateEnumMap = {
   RtmLinkState.idle: 0,
   RtmLinkState.connecting: 1,
@@ -427,6 +526,47 @@ const _$RtmServiceTypeEnumMap = {
   RtmServiceType.none: 0,
   RtmServiceType.message: 1,
   RtmServiceType.stream: 2,
+};
+
+const _$RtmLinkStateChangeReasonEnumMap = {
+  RtmLinkStateChangeReason.unknown: 0,
+  RtmLinkStateChangeReason.login: 1,
+  RtmLinkStateChangeReason.loginSuccess: 2,
+  RtmLinkStateChangeReason.loginTimeout: 3,
+  RtmLinkStateChangeReason.loginNotAuthorized: 4,
+  RtmLinkStateChangeReason.loginRejected: 5,
+  RtmLinkStateChangeReason.relogin: 6,
+  RtmLinkStateChangeReason.logout: 7,
+  RtmLinkStateChangeReason.autoReconnect: 8,
+  RtmLinkStateChangeReason.reconnectTimeout: 9,
+  RtmLinkStateChangeReason.reconnectSuccess: 10,
+  RtmLinkStateChangeReason.join: 11,
+  RtmLinkStateChangeReason.joinSuccess: 12,
+  RtmLinkStateChangeReason.joinFailed: 13,
+  RtmLinkStateChangeReason.rejoin: 14,
+  RtmLinkStateChangeReason.leave: 15,
+  RtmLinkStateChangeReason.invalidToken: 16,
+  RtmLinkStateChangeReason.tokenExpired: 17,
+  RtmLinkStateChangeReason.inconsistentAppId: 18,
+  RtmLinkStateChangeReason.invalidChannelName: 19,
+  RtmLinkStateChangeReason.invalidUserId: 20,
+  RtmLinkStateChangeReason.notInitialized: 21,
+  RtmLinkStateChangeReason.rtmServiceNotConnected: 22,
+  RtmLinkStateChangeReason.channelInstanceExceedLimitation: 23,
+  RtmLinkStateChangeReason.operationRateExceedLimitation: 24,
+  RtmLinkStateChangeReason.channelInErrorState: 25,
+  RtmLinkStateChangeReason.presenceNotConnected: 26,
+  RtmLinkStateChangeReason.sameUidLogin: 27,
+  RtmLinkStateChangeReason.kickedOutByServer: 28,
+  RtmLinkStateChangeReason.keepAliveTimeout: 29,
+  RtmLinkStateChangeReason.connectionError: 30,
+  RtmLinkStateChangeReason.presenceNotReady: 31,
+  RtmLinkStateChangeReason.networkChange: 32,
+  RtmLinkStateChangeReason.serviceNotSupported: 33,
+  RtmLinkStateChangeReason.streamChannelNotAvailable: 34,
+  RtmLinkStateChangeReason.storageNotAvailable: 35,
+  RtmLinkStateChangeReason.lockNotAvailable: 36,
+  RtmLinkStateChangeReason.loginTooFrequent: 37,
 };
 
 const _$RtmProtocolTypeEnumMap = {
@@ -471,6 +611,7 @@ const _$RtmErrorCodeEnumMap = {
   RtmErrorCode.loginCanceled: -10023,
   RtmErrorCode.invalidPrivateConfig: -10024,
   RtmErrorCode.notConnected: -10025,
+  RtmErrorCode.renewTokenTimeout: -10026,
   RtmErrorCode.channelNotJoined: -11001,
   RtmErrorCode.channelNotSubscribed: -11002,
   RtmErrorCode.channelExceedTopicUserLimitation: -11003,
@@ -505,6 +646,11 @@ const _$RtmErrorCodeEnumMap = {
   RtmErrorCode.channelPresenceNotReady: -11032,
   RtmErrorCode.channelReceiverOffline: -11033,
   RtmErrorCode.channelJoinCanceled: -11034,
+  RtmErrorCode.channelReceiverOfflineButStoreSucceeded: -11035,
+  RtmErrorCode.channelReceiverOfflineAndStoreFailed: -11036,
+  RtmErrorCode.channelMessageDeliveredButStoreFailed: -11037,
+  RtmErrorCode.channelSubscribePermissionDenied: -11038,
+  RtmErrorCode.channelPublishPermissionDenied: -11039,
   RtmErrorCode.storageOperationFailed: -12001,
   RtmErrorCode.storageMetadataItemExceedLimitation: -12002,
   RtmErrorCode.storageInvalidMetadataItem: -12003,
@@ -524,6 +670,7 @@ const _$RtmErrorCodeEnumMap = {
   RtmErrorCode.storageSubscribeUserExceedLimitation: -12017,
   RtmErrorCode.storageOperationTimeout: -12018,
   RtmErrorCode.storageNotAvailable: -12019,
+  RtmErrorCode.storagePermissionDenied: -12020,
   RtmErrorCode.presenceNotConnected: -13001,
   RtmErrorCode.presenceNotWritable: -13002,
   RtmErrorCode.presenceInvalidArgument: -13003,
@@ -546,6 +693,13 @@ const _$RtmErrorCodeEnumMap = {
   RtmErrorCode.lockAcquireFailed: -14007,
   RtmErrorCode.lockNotExist: -14008,
   RtmErrorCode.lockNotAvailable: -14009,
+  RtmErrorCode.lockPermissionDenied: -14010,
+  RtmErrorCode.historyOperationFailed: -15001,
+  RtmErrorCode.historyInvalidTimestamp: -15002,
+  RtmErrorCode.historyOperationTimeout: -15003,
+  RtmErrorCode.historyOperationNotPermitted: -15004,
+  RtmErrorCode.historyNotAvailable: -15005,
+  RtmErrorCode.historyPermissionDenied: -15006,
 };
 
 const _$RtmConnectionStateEnumMap = {

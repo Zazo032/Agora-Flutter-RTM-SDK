@@ -10,6 +10,7 @@ const eventIdsMapping = {
   "RtmEventHandler_onTopicEvent": ["RtmEventHandler_onTopicEvent_b4e4bd7"],
   "RtmEventHandler_onLockEvent": ["RtmEventHandler_onLockEvent_5e7fbef"],
   "RtmEventHandler_onStorageEvent": ["RtmEventHandler_onStorageEvent_4304228"],
+  "RtmEventHandler_onTokenEvent": ["RtmEventHandler_onTokenEvent_ec6a1f1"],
   "RtmEventHandler_onJoinResult": ["RtmEventHandler_onJoinResult_ce14e01"],
   "RtmEventHandler_onLeaveResult": ["RtmEventHandler_onLeaveResult_ce14e01"],
   "RtmEventHandler_onPublishTopicMessageResult": [
@@ -116,5 +117,8 @@ const eventIdsMapping = {
   ],
   "RtmEventHandler_onPresenceGetStateResult": [
     "RtmEventHandler_onPresenceGetStateResult_3d764cc"
+  ],
+  "RtmEventHandler_onHistoryGetMessagesResult": [
+    "RtmEventHandler_onGetHistoryMessagesResult_c5dd08c"
   ]
 };

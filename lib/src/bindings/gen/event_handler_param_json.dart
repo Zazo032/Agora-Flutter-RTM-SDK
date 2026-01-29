@@ -171,6 +171,33 @@ extension RtmEventHandlerOnStorageEventJsonBufferExt
 }
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
+class RtmEventHandlerOnTokenEventJson {
+  const RtmEventHandlerOnTokenEventJson({this.event});
+
+  @JsonKey(name: 'event')
+  final TokenEvent? event;
+
+  factory RtmEventHandlerOnTokenEventJson.fromJson(Map<String, dynamic> json) =>
+      _$RtmEventHandlerOnTokenEventJsonFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$RtmEventHandlerOnTokenEventJsonToJson(this);
+}
+
+extension RtmEventHandlerOnTokenEventJsonBufferExt
+    on RtmEventHandlerOnTokenEventJson {
+  RtmEventHandlerOnTokenEventJson fillBuffers(List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    return this;
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    return bufferList;
+  }
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RtmEventHandlerOnJoinResultJson {
   const RtmEventHandlerOnJoinResultJson(
       {this.requestId, this.channelName, this.userId, this.errorCode});
@@ -1592,7 +1619,7 @@ class RtmEventHandlerOnGetUserChannelsResultJson {
   final int? requestId;
 
   @JsonKey(name: 'channels')
-  final ChannelInfo? channels;
+  final List<ChannelInfo>? channels;
 
   @JsonKey(name: 'count')
   final int? count;
@@ -1713,6 +1740,52 @@ class RtmEventHandlerOnPresenceGetStateResultJson {
 extension RtmEventHandlerOnPresenceGetStateResultJsonBufferExt
     on RtmEventHandlerOnPresenceGetStateResultJson {
   RtmEventHandlerOnPresenceGetStateResultJson fillBuffers(
+      List<Uint8List> bufferList) {
+    if (bufferList.isEmpty) return this;
+    return this;
+  }
+
+  List<Uint8List> collectBufferList() {
+    final bufferList = <Uint8List>[];
+    return bufferList;
+  }
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class RtmEventHandlerOnHistoryGetMessagesResultJson {
+  const RtmEventHandlerOnHistoryGetMessagesResultJson(
+      {this.requestId,
+      this.messageList,
+      this.count,
+      this.newStart,
+      this.errorCode});
+
+  @JsonKey(name: 'requestId')
+  final int? requestId;
+
+  @JsonKey(name: 'messageList')
+  final List<HistoryMessage>? messageList;
+
+  @JsonKey(name: 'count')
+  final int? count;
+
+  @JsonKey(name: 'newStart')
+  final int? newStart;
+
+  @JsonKey(name: 'errorCode')
+  final RtmErrorCode? errorCode;
+
+  factory RtmEventHandlerOnHistoryGetMessagesResultJson.fromJson(
+          Map<String, dynamic> json) =>
+      _$RtmEventHandlerOnHistoryGetMessagesResultJsonFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$RtmEventHandlerOnHistoryGetMessagesResultJsonToJson(this);
+}
+
+extension RtmEventHandlerOnHistoryGetMessagesResultJsonBufferExt
+    on RtmEventHandlerOnHistoryGetMessagesResultJson {
+  RtmEventHandlerOnHistoryGetMessagesResultJson fillBuffers(
       List<Uint8List> bufferList) {
     if (bufferList.isEmpty) return this;
     return this;

@@ -5,6 +5,34 @@ part 'agora_rtm_base.g.dart';
 const defaultLogSizeInKb = 1024;
 
 @JsonEnum(alwaysCreate: true)
+enum RtmTokenEventType {
+  @JsonValue(1)
+  willExpire,
+
+  @JsonValue(2)
+  readPermissionRevoked,
+  ;
+
+  /// @nodoc
+  static RtmTokenEventType fromValue(int value) {
+    return $enumDecode(_$RtmTokenEventTypeEnumMap, value);
+  }
+}
+
+extension RtmTokenEventTypeExt on RtmTokenEventType {
+  /// @nodoc
+  @Deprecated('Use RtmTokenEventType.fromValue instead')
+  static RtmTokenEventType fromValue(int value) {
+    return $enumDecode(_$RtmTokenEventTypeEnumMap, value);
+  }
+
+  /// @nodoc
+  int value() {
+    return _$RtmTokenEventTypeEnumMap[this]!;
+  }
+}
+
+@JsonEnum(alwaysCreate: true)
 enum RtmLinkState {
   @JsonValue(0)
   idle,
@@ -23,10 +51,17 @@ enum RtmLinkState {
 
   @JsonValue(5)
   failed,
+  ;
+
+  /// @nodoc
+  static RtmLinkState fromValue(int value) {
+    return $enumDecode(_$RtmLinkStateEnumMap, value);
+  }
 }
 
 extension RtmLinkStateExt on RtmLinkState {
   /// @nodoc
+  @Deprecated('Use RtmLinkState.fromValue instead')
   static RtmLinkState fromValue(int value) {
     return $enumDecode(_$RtmLinkStateEnumMap, value);
   }
@@ -68,10 +103,17 @@ enum RtmLinkOperation {
 
   @JsonValue(9)
   networkChange,
+  ;
+
+  /// @nodoc
+  static RtmLinkOperation fromValue(int value) {
+    return $enumDecode(_$RtmLinkOperationEnumMap, value);
+  }
 }
 
 extension RtmLinkOperationExt on RtmLinkOperation {
   /// @nodoc
+  @Deprecated('Use RtmLinkOperation.fromValue instead')
   static RtmLinkOperation fromValue(int value) {
     return $enumDecode(_$RtmLinkOperationEnumMap, value);
   }
@@ -92,10 +134,17 @@ enum RtmServiceType {
 
   @JsonValue(0x00000002)
   stream,
+  ;
+
+  /// @nodoc
+  static RtmServiceType fromValue(int value) {
+    return $enumDecode(_$RtmServiceTypeEnumMap, value);
+  }
 }
 
 extension RtmServiceTypeExt on RtmServiceType {
   /// @nodoc
+  @Deprecated('Use RtmServiceType.fromValue instead')
   static RtmServiceType fromValue(int value) {
     return $enumDecode(_$RtmServiceTypeEnumMap, value);
   }
@@ -107,16 +156,159 @@ extension RtmServiceTypeExt on RtmServiceType {
 }
 
 @JsonEnum(alwaysCreate: true)
+enum RtmLinkStateChangeReason {
+  @JsonValue(0)
+  unknown,
+
+  @JsonValue(1)
+  login,
+
+  @JsonValue(2)
+  loginSuccess,
+
+  @JsonValue(3)
+  loginTimeout,
+
+  @JsonValue(4)
+  loginNotAuthorized,
+
+  @JsonValue(5)
+  loginRejected,
+
+  @JsonValue(6)
+  relogin,
+
+  @JsonValue(7)
+  logout,
+
+  @JsonValue(8)
+  autoReconnect,
+
+  @JsonValue(9)
+  reconnectTimeout,
+
+  @JsonValue(10)
+  reconnectSuccess,
+
+  @JsonValue(11)
+  join,
+
+  @JsonValue(12)
+  joinSuccess,
+
+  @JsonValue(13)
+  joinFailed,
+
+  @JsonValue(14)
+  rejoin,
+
+  @JsonValue(15)
+  leave,
+
+  @JsonValue(16)
+  invalidToken,
+
+  @JsonValue(17)
+  tokenExpired,
+
+  @JsonValue(18)
+  inconsistentAppId,
+
+  @JsonValue(19)
+  invalidChannelName,
+
+  @JsonValue(20)
+  invalidUserId,
+
+  @JsonValue(21)
+  notInitialized,
+
+  @JsonValue(22)
+  rtmServiceNotConnected,
+
+  @JsonValue(23)
+  channelInstanceExceedLimitation,
+
+  @JsonValue(24)
+  operationRateExceedLimitation,
+
+  @JsonValue(25)
+  channelInErrorState,
+
+  @JsonValue(26)
+  presenceNotConnected,
+
+  @JsonValue(27)
+  sameUidLogin,
+
+  @JsonValue(28)
+  kickedOutByServer,
+
+  @JsonValue(29)
+  keepAliveTimeout,
+
+  @JsonValue(30)
+  connectionError,
+
+  @JsonValue(31)
+  presenceNotReady,
+
+  @JsonValue(32)
+  networkChange,
+
+  @JsonValue(33)
+  serviceNotSupported,
+
+  @JsonValue(34)
+  streamChannelNotAvailable,
+
+  @JsonValue(35)
+  storageNotAvailable,
+
+  @JsonValue(36)
+  lockNotAvailable,
+
+  @JsonValue(37)
+  loginTooFrequent,
+  ;
+
+  /// @nodoc
+  static RtmLinkStateChangeReason fromValue(int value) {
+    return $enumDecode(_$RtmLinkStateChangeReasonEnumMap, value);
+  }
+}
+
+extension RtmLinkStateChangeReasonExt on RtmLinkStateChangeReason {
+  /// @nodoc
+  @Deprecated('Use RtmLinkStateChangeReason.fromValue instead')
+  static RtmLinkStateChangeReason fromValue(int value) {
+    return $enumDecode(_$RtmLinkStateChangeReasonEnumMap, value);
+  }
+
+  /// @nodoc
+  int value() {
+    return _$RtmLinkStateChangeReasonEnumMap[this]!;
+  }
+}
+
+@JsonEnum(alwaysCreate: true)
 enum RtmProtocolType {
   @JsonValue(0)
   tcpUdp,
 
   @JsonValue(1)
   tcpOnly,
+  ;
+
+  /// @nodoc
+  static RtmProtocolType fromValue(int value) {
+    return $enumDecode(_$RtmProtocolTypeEnumMap, value);
+  }
 }
 
 extension RtmProtocolTypeExt on RtmProtocolType {
   /// @nodoc
+  @Deprecated('Use RtmProtocolType.fromValue instead')
   static RtmProtocolType fromValue(int value) {
     return $enumDecode(_$RtmProtocolTypeEnumMap, value);
   }
@@ -149,10 +341,17 @@ enum RtmAreaCode {
 
   @JsonValue((0xFFFFFFFF))
   glob,
+  ;
+
+  /// @nodoc
+  static RtmAreaCode fromValue(int value) {
+    return $enumDecode(_$RtmAreaCodeEnumMap, value);
+  }
 }
 
 extension RtmAreaCodeExt on RtmAreaCode {
   /// @nodoc
+  @Deprecated('Use RtmAreaCode.fromValue instead')
   static RtmAreaCode fromValue(int value) {
     return $enumDecode(_$RtmAreaCodeEnumMap, value);
   }
@@ -179,10 +378,17 @@ enum RtmLogLevel {
 
   @JsonValue(0x0008)
   fatal,
+  ;
+
+  /// @nodoc
+  static RtmLogLevel fromValue(int value) {
+    return $enumDecode(_$RtmLogLevelEnumMap, value);
+  }
 }
 
 extension RtmLogLevelExt on RtmLogLevel {
   /// @nodoc
+  @Deprecated('Use RtmLogLevel.fromValue instead')
   static RtmLogLevel fromValue(int value) {
     return $enumDecode(_$RtmLogLevelEnumMap, value);
   }
@@ -203,10 +409,17 @@ enum RtmEncryptionMode {
 
   @JsonValue(2)
   aes256Gcm,
+  ;
+
+  /// @nodoc
+  static RtmEncryptionMode fromValue(int value) {
+    return $enumDecode(_$RtmEncryptionModeEnumMap, value);
+  }
 }
 
 extension RtmEncryptionModeExt on RtmEncryptionMode {
   /// @nodoc
+  @Deprecated('Use RtmEncryptionMode.fromValue instead')
   static RtmEncryptionMode fromValue(int value) {
     return $enumDecode(_$RtmEncryptionModeEnumMap, value);
   }
@@ -296,6 +509,9 @@ enum RtmErrorCode {
 
   @JsonValue(-10025)
   notConnected,
+
+  @JsonValue(-10026)
+  renewTokenTimeout,
 
   @JsonValue(-11001)
   channelNotJoined,
@@ -399,6 +615,21 @@ enum RtmErrorCode {
   @JsonValue(-11034)
   channelJoinCanceled,
 
+  @JsonValue(-11035)
+  channelReceiverOfflineButStoreSucceeded,
+
+  @JsonValue(-11036)
+  channelReceiverOfflineAndStoreFailed,
+
+  @JsonValue(-11037)
+  channelMessageDeliveredButStoreFailed,
+
+  @JsonValue(-11038)
+  channelSubscribePermissionDenied,
+
+  @JsonValue(-11039)
+  channelPublishPermissionDenied,
+
   @JsonValue(-12001)
   storageOperationFailed,
 
@@ -455,6 +686,9 @@ enum RtmErrorCode {
 
   @JsonValue(-12019)
   storageNotAvailable,
+
+  @JsonValue(-12020)
+  storagePermissionDenied,
 
   @JsonValue(-13001)
   presenceNotConnected,
@@ -521,10 +755,38 @@ enum RtmErrorCode {
 
   @JsonValue(-14009)
   lockNotAvailable,
+
+  @JsonValue(-14010)
+  lockPermissionDenied,
+
+  @JsonValue(-15001)
+  historyOperationFailed,
+
+  @JsonValue(-15002)
+  historyInvalidTimestamp,
+
+  @JsonValue(-15003)
+  historyOperationTimeout,
+
+  @JsonValue(-15004)
+  historyOperationNotPermitted,
+
+  @JsonValue(-15005)
+  historyNotAvailable,
+
+  @JsonValue(-15006)
+  historyPermissionDenied,
+  ;
+
+  /// @nodoc
+  static RtmErrorCode fromValue(int value) {
+    return $enumDecode(_$RtmErrorCodeEnumMap, value);
+  }
 }
 
 extension RtmErrorCodeExt on RtmErrorCode {
   /// @nodoc
+  @Deprecated('Use RtmErrorCode.fromValue instead')
   static RtmErrorCode fromValue(int value) {
     return $enumDecode(_$RtmErrorCodeEnumMap, value);
   }
@@ -551,10 +813,17 @@ enum RtmConnectionState {
 
   @JsonValue(5)
   failed,
+  ;
+
+  /// @nodoc
+  static RtmConnectionState fromValue(int value) {
+    return $enumDecode(_$RtmConnectionStateEnumMap, value);
+  }
 }
 
 extension RtmConnectionStateExt on RtmConnectionState {
   /// @nodoc
+  @Deprecated('Use RtmConnectionState.fromValue instead')
   static RtmConnectionState fromValue(int value) {
     return $enumDecode(_$RtmConnectionStateEnumMap, value);
   }
@@ -650,10 +919,17 @@ enum RtmConnectionChangeReason {
 
   @JsonValue(10003)
   presenceNotReady,
+  ;
+
+  /// @nodoc
+  static RtmConnectionChangeReason fromValue(int value) {
+    return $enumDecode(_$RtmConnectionChangeReasonEnumMap, value);
+  }
 }
 
 extension RtmConnectionChangeReasonExt on RtmConnectionChangeReason {
   /// @nodoc
+  @Deprecated('Use RtmConnectionChangeReason.fromValue instead')
   static RtmConnectionChangeReason fromValue(int value) {
     return $enumDecode(_$RtmConnectionChangeReasonEnumMap, value);
   }
@@ -677,10 +953,17 @@ enum RtmChannelType {
 
   @JsonValue(3)
   user,
+  ;
+
+  /// @nodoc
+  static RtmChannelType fromValue(int value) {
+    return $enumDecode(_$RtmChannelTypeEnumMap, value);
+  }
 }
 
 extension RtmChannelTypeExt on RtmChannelType {
   /// @nodoc
+  @Deprecated('Use RtmChannelType.fromValue instead')
   static RtmChannelType fromValue(int value) {
     return $enumDecode(_$RtmChannelTypeEnumMap, value);
   }
@@ -698,10 +981,17 @@ enum RtmMessageType {
 
   @JsonValue(1)
   string,
+  ;
+
+  /// @nodoc
+  static RtmMessageType fromValue(int value) {
+    return $enumDecode(_$RtmMessageTypeEnumMap, value);
+  }
 }
 
 extension RtmMessageTypeExt on RtmMessageType {
   /// @nodoc
+  @Deprecated('Use RtmMessageType.fromValue instead')
   static RtmMessageType fromValue(int value) {
     return $enumDecode(_$RtmMessageTypeEnumMap, value);
   }
@@ -722,10 +1012,17 @@ enum RtmStorageType {
 
   @JsonValue(2)
   channel,
+  ;
+
+  /// @nodoc
+  static RtmStorageType fromValue(int value) {
+    return $enumDecode(_$RtmStorageTypeEnumMap, value);
+  }
 }
 
 extension RtmStorageTypeExt on RtmStorageType {
   /// @nodoc
+  @Deprecated('Use RtmStorageType.fromValue instead')
   static RtmStorageType fromValue(int value) {
     return $enumDecode(_$RtmStorageTypeEnumMap, value);
   }
@@ -752,10 +1049,17 @@ enum RtmStorageEventType {
 
   @JsonValue(4)
   remove,
+  ;
+
+  /// @nodoc
+  static RtmStorageEventType fromValue(int value) {
+    return $enumDecode(_$RtmStorageEventTypeEnumMap, value);
+  }
 }
 
 extension RtmStorageEventTypeExt on RtmStorageEventType {
   /// @nodoc
+  @Deprecated('Use RtmStorageEventType.fromValue instead')
   static RtmStorageEventType fromValue(int value) {
     return $enumDecode(_$RtmStorageEventTypeEnumMap, value);
   }
@@ -788,10 +1092,17 @@ enum RtmLockEventType {
 
   @JsonValue(6)
   lockExpired,
+  ;
+
+  /// @nodoc
+  static RtmLockEventType fromValue(int value) {
+    return $enumDecode(_$RtmLockEventTypeEnumMap, value);
+  }
 }
 
 extension RtmLockEventTypeExt on RtmLockEventType {
   /// @nodoc
+  @Deprecated('Use RtmLockEventType.fromValue instead')
   static RtmLockEventType fromValue(int value) {
     return $enumDecode(_$RtmLockEventTypeEnumMap, value);
   }
@@ -812,10 +1123,17 @@ enum RtmProxyType {
 
   @JsonValue(2)
   cloudTcp,
+  ;
+
+  /// @nodoc
+  static RtmProxyType fromValue(int value) {
+    return $enumDecode(_$RtmProxyTypeEnumMap, value);
+  }
 }
 
 extension RtmProxyTypeExt on RtmProxyType {
   /// @nodoc
+  @Deprecated('Use RtmProxyType.fromValue instead')
   static RtmProxyType fromValue(int value) {
     return $enumDecode(_$RtmProxyTypeEnumMap, value);
   }
@@ -839,10 +1157,17 @@ enum RtmTopicEventType {
 
   @JsonValue(3)
   remoteLeaveTopic,
+  ;
+
+  /// @nodoc
+  static RtmTopicEventType fromValue(int value) {
+    return $enumDecode(_$RtmTopicEventTypeEnumMap, value);
+  }
 }
 
 extension RtmTopicEventTypeExt on RtmTopicEventType {
   /// @nodoc
+  @Deprecated('Use RtmTopicEventType.fromValue instead')
   static RtmTopicEventType fromValue(int value) {
     return $enumDecode(_$RtmTopicEventTypeEnumMap, value);
   }
@@ -878,10 +1203,17 @@ enum RtmPresenceEventType {
 
   @JsonValue(7)
   errorOutOfService,
+  ;
+
+  /// @nodoc
+  static RtmPresenceEventType fromValue(int value) {
+    return $enumDecode(_$RtmPresenceEventTypeEnumMap, value);
+  }
 }
 
 extension RtmPresenceEventTypeExt on RtmPresenceEventType {
   /// @nodoc
+  @Deprecated('Use RtmPresenceEventType.fromValue instead')
   static RtmPresenceEventType fromValue(int value) {
     return $enumDecode(_$RtmPresenceEventTypeEnumMap, value);
   }
@@ -1081,7 +1413,8 @@ class PublishOptions {
   const PublishOptions(
       {this.channelType = RtmChannelType.message,
       this.messageType = RtmMessageType.binary,
-      this.customType});
+      this.customType,
+      this.storeInHistory = false});
 
   @JsonKey(name: 'channelType')
   final RtmChannelType? channelType;
@@ -1091,6 +1424,9 @@ class PublishOptions {
 
   @JsonKey(name: 'customType')
   final String? customType;
+
+  @JsonKey(name: 'storeInHistory')
+  final bool? storeInHistory;
 
   factory PublishOptions.fromJson(Map<String, dynamic> json) =>
       _$PublishOptionsFromJson(json);
@@ -1208,4 +1544,84 @@ class RtmPrivateConfig {
       _$RtmPrivateConfigFromJson(json);
 
   Map<String, dynamic> toJson() => _$RtmPrivateConfigToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class GetHistoryMessagesOptions {
+  const GetHistoryMessagesOptions(
+      {this.messageCount = 100, this.start = 0, this.end = 0});
+
+  @JsonKey(name: 'messageCount')
+  final int? messageCount;
+
+  @JsonKey(name: 'start')
+  final int? start;
+
+  @JsonKey(name: 'end')
+  final int? end;
+
+  factory GetHistoryMessagesOptions.fromJson(Map<String, dynamic> json) =>
+      _$GetHistoryMessagesOptionsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetHistoryMessagesOptionsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class HistoryMessage {
+  const HistoryMessage(
+      {this.messageType = RtmMessageType.binary,
+      this.publisher,
+      this.message,
+      this.messageLength = 0,
+      this.customType,
+      this.timestamp = 0});
+
+  @JsonKey(name: 'messageType')
+  final RtmMessageType? messageType;
+
+  @JsonKey(name: 'publisher')
+  final String? publisher;
+
+  @JsonKey(name: 'message', ignore: true)
+  final Uint8List? message;
+
+  @JsonKey(name: 'messageLength')
+  final int? messageLength;
+
+  @JsonKey(name: 'customType')
+  final String? customType;
+
+  @JsonKey(name: 'timestamp')
+  final int? timestamp;
+
+  factory HistoryMessage.fromJson(Map<String, dynamic> json) =>
+      _$HistoryMessageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HistoryMessageToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class ChannelList {
+  const ChannelList({this.channels});
+
+  @JsonKey(name: 'channels')
+  final List<String>? channels;
+
+  factory ChannelList.fromJson(Map<String, dynamic> json) =>
+      _$ChannelListFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChannelListToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class AffectedResources {
+  const AffectedResources({this.messageChannels});
+
+  @JsonKey(name: 'messageChannels')
+  final ChannelList? messageChannels;
+
+  factory AffectedResources.fromJson(Map<String, dynamic> json) =>
+      _$AffectedResourcesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AffectedResourcesToJson(this);
 }

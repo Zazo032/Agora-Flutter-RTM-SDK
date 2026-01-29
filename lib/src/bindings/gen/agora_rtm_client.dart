@@ -9,6 +9,7 @@ class RtmEventHandler {
     this.onTopicEvent,
     this.onLockEvent,
     this.onStorageEvent,
+    this.onTokenEvent,
     this.onJoinResult,
     this.onLeaveResult,
     this.onPublishTopicMessageResult,
@@ -48,6 +49,7 @@ class RtmEventHandler {
     this.onPresenceSetStateResult,
     this.onPresenceRemoveStateResult,
     this.onPresenceGetStateResult,
+    this.onHistoryGetMessagesResult,
   });
 
   final void Function(LinkStateEvent event)? onLinkStateEvent;
@@ -61,6 +63,8 @@ class RtmEventHandler {
   final void Function(LockEvent event)? onLockEvent;
 
   final void Function(StorageEvent event)? onStorageEvent;
+
+  final void Function(TokenEvent event)? onTokenEvent;
 
   final void Function(int requestId, String channelName, String userId,
       RtmErrorCode errorCode)? onJoinResult;
@@ -211,7 +215,7 @@ class RtmEventHandler {
   final void Function(int requestId, List<ChannelInfo> channels, int count,
       RtmErrorCode errorCode)? onWhereNowResult;
 
-  final void Function(int requestId, ChannelInfo channels, int count,
+  final void Function(int requestId, List<ChannelInfo> channels, int count,
       RtmErrorCode errorCode)? onGetUserChannelsResult;
 
   final void Function(int requestId, RtmErrorCode errorCode)?
@@ -222,6 +226,13 @@ class RtmEventHandler {
 
   final void Function(int requestId, UserState state, RtmErrorCode errorCode)?
       onPresenceGetStateResult;
+
+  final void Function(
+      int requestId,
+      List<HistoryMessage> messageList,
+      int count,
+      int newStart,
+      RtmErrorCode errorCode)? onHistoryGetMessagesResult;
 }
 
 abstract class RtmClient {
@@ -236,6 +247,8 @@ abstract class RtmClient {
   Future<RtmLock> getLock();
 
   Future<RtmPresence> getPresence();
+
+  Future<RtmHistory> getHistory();
 
   Future<int> renewToken(String token);
 

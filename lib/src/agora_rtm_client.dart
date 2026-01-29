@@ -8,7 +8,9 @@ class RtmConfig {
       this.protocolType = RtmProtocolType.tcpUdp,
       this.presenceTimeout = 300,
       this.heartbeatInterval = 5,
+      this.reconnectTimeout = 0,
       this.useStringUserId = true,
+      this.ispPolicyEnabled = false,
       this.logConfig,
       this.proxyConfig,
       this.encryptionConfig,
@@ -27,8 +29,14 @@ class RtmConfig {
   @JsonKey(name: 'heartbeatInterval')
   final int? heartbeatInterval;
 
+  @JsonKey(name: 'reconnectTimeout')
+  final int? reconnectTimeout;
+
   @JsonKey(name: 'useStringUserId')
   final bool? useStringUserId;
+
+  @JsonKey(name: 'ispPolicyEnabled')
+  final bool? ispPolicyEnabled;
 
   @JsonKey(name: 'logConfig')
   final RtmLogConfig? logConfig;
@@ -55,6 +63,7 @@ class LinkStateEvent {
       this.previousState,
       this.serviceType,
       this.operation,
+      this.reasonCode,
       this.reason,
       this.affectedChannels,
       this.unrestoredChannels,
@@ -72,6 +81,9 @@ class LinkStateEvent {
 
   @JsonKey(name: 'operation')
   final RtmLinkOperation? operation;
+
+  @JsonKey(name: 'reasonCode')
+  final RtmLinkStateChangeReason? reasonCode;
 
   @JsonKey(name: 'reason')
   final String? reason;
@@ -315,6 +327,29 @@ class StorageEvent {
   Map<String, dynamic> toJson() => _$StorageEventToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class TokenEvent {
+  const TokenEvent(
+      {this.eventType, this.reason, this.affectedResources, this.timestamp});
+
+  @JsonKey(name: 'eventType')
+  final RtmTokenEventType? eventType;
+
+  @JsonKey(name: 'reason')
+  final String? reason;
+
+  @JsonKey(name: 'affectedResources')
+  final AffectedResources? affectedResources;
+
+  @JsonKey(name: 'timestamp')
+  final int? timestamp;
+
+  factory TokenEvent.fromJson(Map<String, dynamic> json) =>
+      _$TokenEventFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TokenEventToJson(this);
+}
+
 class LoginResult {
   LoginResult();
 }
@@ -344,11 +379,6 @@ class SubscribeResult {
 class UnsubscribeResult {
   UnsubscribeResult({required this.channelName});
 
-  final String channelName;
-}
-
-class TokenEvent {
-  const TokenEvent(this.channelName);
   final String channelName;
 }
 
@@ -383,12 +413,15 @@ abstract class RtmClient {
 
   RtmPresence getPresence();
 
+  RtmHistory getHistory();
+
   Future<(RtmStatus, RenewTokenResult?)> renewToken(String token);
 
   Future<(RtmStatus, PublishResult?)> publish(
       String channelName, String message,
       {RtmChannelType channelType = RtmChannelType.message,
-      String? customType});
+      String? customType,
+      bool storeInHistory = false});
 
   Future<(RtmStatus, SubscribeResult?)> subscribe(String channelName,
       {bool withMessage = true,
@@ -406,5 +439,6 @@ abstract class RtmClient {
   Future<(RtmStatus, PublishResult?)> publishBinaryMessage(
       String channelName, Uint8List message,
       {RtmChannelType channelType = RtmChannelType.message,
-      String? customType});
+      String? customType,
+      bool storeInHistory = false});
 }

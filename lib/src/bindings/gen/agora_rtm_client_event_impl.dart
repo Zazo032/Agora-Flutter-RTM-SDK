@@ -123,6 +123,22 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
         rtmEventHandler.onStorageEvent!(event);
         return true;
 
+      case 'onTokenEvent_ec6a1f1':
+        if (rtmEventHandler.onTokenEvent == null) {
+          return true;
+        }
+        final jsonMap = jsonDecode(eventData);
+        RtmEventHandlerOnTokenEventJson paramJson =
+            RtmEventHandlerOnTokenEventJson.fromJson(jsonMap);
+        paramJson = paramJson.fillBuffers(buffers);
+        TokenEvent? event = paramJson.event;
+        if (event == null) {
+          return true;
+        }
+        event = event.fillBuffers(buffers);
+        rtmEventHandler.onTokenEvent!(event);
+        return true;
+
       case 'onJoinResult_ce14e01':
         if (rtmEventHandler.onJoinResult == null) {
           return true;
@@ -829,8 +845,12 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
             errorCode == null) {
           return true;
         }
-        lockDetailList =
-            lockDetailList.map((e) => e.fillBuffers(buffers)).toList();
+        lockDetailList = lockDetailList
+            .asMap()
+            .entries
+            .map((entry) => entry.value.fillBuffers(
+                [if (entry.key < buffers.length) buffers[entry.key]]))
+            .toList();
         rtmEventHandler.onGetLocksResult!(requestId, channelName, channelType,
             lockDetailList, count, errorCode);
         return true;
@@ -855,8 +875,12 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
             errorCode == null) {
           return true;
         }
-        userStateList =
-            userStateList.map((e) => e.fillBuffers(buffers)).toList();
+        userStateList = userStateList
+            .asMap()
+            .entries
+            .map((entry) => entry.value.fillBuffers(
+                [if (entry.key < buffers.length) buffers[entry.key]]))
+            .toList();
         rtmEventHandler.onWhoNowResult!(
             requestId, userStateList, count, nextPage, errorCode);
         return true;
@@ -881,8 +905,12 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
             errorCode == null) {
           return true;
         }
-        userStateList =
-            userStateList.map((e) => e.fillBuffers(buffers)).toList();
+        userStateList = userStateList
+            .asMap()
+            .entries
+            .map((entry) => entry.value.fillBuffers(
+                [if (entry.key < buffers.length) buffers[entry.key]]))
+            .toList();
         rtmEventHandler.onGetOnlineUsersResult!(
             requestId, userStateList, count, nextPage, errorCode);
         return true;
@@ -905,7 +933,12 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
             errorCode == null) {
           return true;
         }
-        channels = channels.map((e) => e.fillBuffers(buffers)).toList();
+        channels = channels
+            .asMap()
+            .entries
+            .map((entry) => entry.value.fillBuffers(
+                [if (entry.key < buffers.length) buffers[entry.key]]))
+            .toList();
         rtmEventHandler.onWhereNowResult!(
             requestId, channels, count, errorCode);
         return true;
@@ -919,7 +952,7 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
             RtmEventHandlerOnGetUserChannelsResultJson.fromJson(jsonMap);
         paramJson = paramJson.fillBuffers(buffers);
         int? requestId = paramJson.requestId;
-        ChannelInfo? channels = paramJson.channels;
+        List<ChannelInfo>? channels = paramJson.channels;
         int? count = paramJson.count;
         RtmErrorCode? errorCode = paramJson.errorCode;
         if (requestId == null ||
@@ -928,7 +961,12 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
             errorCode == null) {
           return true;
         }
-        channels = channels.fillBuffers(buffers);
+        channels = channels
+            .asMap()
+            .entries
+            .map((entry) => entry.value.fillBuffers(
+                [if (entry.key < buffers.length) buffers[entry.key]]))
+            .toList();
         rtmEventHandler.onGetUserChannelsResult!(
             requestId, channels, count, errorCode);
         return true;
@@ -983,6 +1021,36 @@ class RtmEventHandlerWrapper implements EventLoopEventHandler {
         }
         state = state.fillBuffers(buffers);
         rtmEventHandler.onPresenceGetStateResult!(requestId, state, errorCode);
+        return true;
+
+      case 'onGetHistoryMessagesResult_c5dd08c':
+        if (rtmEventHandler.onHistoryGetMessagesResult == null) {
+          return true;
+        }
+        final jsonMap = jsonDecode(eventData);
+        RtmEventHandlerOnHistoryGetMessagesResultJson paramJson =
+            RtmEventHandlerOnHistoryGetMessagesResultJson.fromJson(jsonMap);
+        paramJson = paramJson.fillBuffers(buffers);
+        int? requestId = paramJson.requestId;
+        List<HistoryMessage>? messageList = paramJson.messageList;
+        int? count = paramJson.count;
+        int? newStart = paramJson.newStart;
+        RtmErrorCode? errorCode = paramJson.errorCode;
+        if (requestId == null ||
+            messageList == null ||
+            count == null ||
+            newStart == null ||
+            errorCode == null) {
+          return true;
+        }
+        messageList = messageList
+            .asMap()
+            .entries
+            .map((entry) => entry.value.fillBuffers(
+                [if (entry.key < buffers.length) buffers[entry.key]]))
+            .toList();
+        rtmEventHandler.onHistoryGetMessagesResult!(
+            requestId, messageList, count, newStart, errorCode);
         return true;
     }
     return false;
