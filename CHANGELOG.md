@@ -1,11 +1,5 @@
 # Changelog
 
-## [Unreleased]
-
-### Maintenance
-
-* Update Dart/Flutter dependencies to the latest versions (requires Dart >= 3.9.0).
-
 ## [2.2.2](https://github.com/AgoraIO-Extensions/Agora-Flutter-RTM-SDK/compare/2.2.1...2.2.2) (2024-10-29)
 
 ### Features
